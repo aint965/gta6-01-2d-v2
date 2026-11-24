@@ -454,6 +454,16 @@ export function buildCity(seed = SEED) {
   };
 }
 
+/** Traffic-light state at time t (milliseconds) for light `index`.
+ *  26 s cycle, offset per light: green 12 s, yellow 3 s, red 11 s.
+ *  Shared by the renderer and the engine so both agree on every light. */
+export function lightState(t, index) {
+  const phase = (((t / 1000 + index * 3.1) % 26) + 26) % 26;
+  if (phase < 12) return 'green';
+  if (phase < 15) return 'yellow';
+  return 'red';
+}
+
 /** Where a traffic car is at time t (milliseconds). Deterministic in t.
  *  Cars swing around the plaza fountain like a roundabout: near the
  *  fountain they slide sideways off their lane and back, smoothly. */

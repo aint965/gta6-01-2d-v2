@@ -23,7 +23,11 @@ mkdirSync(dir, { recursive: true });
 // Screen centre (640, 400) is the car; the beam runs north (up the screen).
 // Lit patch: x 615..665, y 170..230 — on the beam axis, between lamp pools.
 // Control patch: x 90..190, y 600..700 — far from the beam, same lighting.
-const base = '?cx=1928&cy=1900&preset=night&zoom=1.2&t=1200';
+// Roof patch: x 632..648, y 150..170 — the white test car's roof in the beam
+// (spawned by ?beamcar=1, 200 units ahead of the player car).
+// ?still=1 freezes the sim (deterministic frame) and ?notraffic=1 keeps
+// traffic out of the patches, so the measurement is the beam alone.
+const base = '?mode=play&incar=1&still=1&notraffic=1&beamcar=1&cx=1928&cy=1900&preset=night&zoom=1.2&t=1200';
 const shots = [
   { file: 'on.png', query: base },
   { file: 'off.png', query: base + '&headlights=off' },
